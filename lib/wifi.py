@@ -11,7 +11,7 @@ def set_connect():
 
     #wlan.connect(ssid='IoT', auth=(WLAN.WPA2, 'KdGIoT92!'))
     #wlan.connect(ssid='telenet-2201056', auth=(WLAN.WPA2, '4XpNpfyjhuh3'))
-    wlan.connect(ssid='telenet-C9C22', auth=(WLAN.WPA2, 'k0T3bU6R0EyA'))
+    wlan.connect(ssid='wifi', auth=(WLAN.WPA2, 'wifiwachtwoord'))
     while not wlan.isconnected():
         machine.idle()
         time.sleep(1)
