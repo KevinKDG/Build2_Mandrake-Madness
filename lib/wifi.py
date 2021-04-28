@@ -8,10 +8,9 @@ wlan = WLAN(mode=WLAN.STA)
 
 def set_connect():
     teller = 0
-
-    #wlan.connect(ssid='IoT', auth=(WLAN.WPA2, 'KdGIoT92!'))
+    wlan.connect(ssid='IoT', auth=(WLAN.WPA2, 'KdGIoT22!'))
     #wlan.connect(ssid='telenet-2201056', auth=(WLAN.WPA2, '4XpNpfyjhuh3'))
-    wlan.connect(ssid='wifi', auth=(WLAN.WPA2, 'wifiwachtwoord'))
+    #wlan.connect(ssid='telenet-C9C22', auth=(WLAN.WPA2, 'k0T3bU6R0EyA'))
     while not wlan.isconnected():
         machine.idle()
         time.sleep(1)
@@ -31,9 +30,9 @@ def sendultra(info):
             set_connect()
     except Exception as e:
         print(e)
-    aio_key = "aio_tzfk620TPcyj6UgkRRC70NIOdpfK"
+    aio_key = "aio_Tvzm06zLMHVhJ619yMf4UtuNcQ45"
     username = "joske"
-    feed_name = "MMultra"
+    feed_name = "mmultra"
 
 # Create an instance of the REST client
     url = 'https://io.adafruit.com/api/v2/' + username + '/feeds/' + feed_name + '/data'
@@ -53,9 +52,9 @@ def sendhumidity(info):
             set_connect()
     except Exception as e:
         print(e)
-    aio_key = "aio_tzfk620TPcyj6UgkRRC70NIOdpfK"
+    aio_key = "aio_Tvzm06zLMHVhJ619yMf4UtuNcQ45"
     username = "joske"
-    feed_name = "MMhumidity"
+    feed_name = "mmhumidity"
 
 # Create an instance of the REST client
     url = 'https://io.adafruit.com/api/v2/' + username + '/feeds/' + feed_name + '/data'
@@ -64,7 +63,7 @@ def sendhumidity(info):
     try:
         r = requests.post(url, json=body, headers=headers)
         r.close()
-
+        print("yes")
     except Exception as e:
         print(e)
 def sendquality(info):
@@ -73,9 +72,9 @@ def sendquality(info):
             set_connect()
     except Exception as e:
         print(e)
-    aio_key = "aio_tzfk620TPcyj6UgkRRC70NIOdpfK"
+    aio_key = "aio_Tvzm06zLMHVhJ619yMf4UtuNcQ45"
     username = "joske"
-    feed_name = "MMquality"
+    feed_name = "mmquality"
 
 # Create an instance of the REST client
     url = 'https://io.adafruit.com/api/v2/' + username + '/feeds/' + feed_name + '/data'

@@ -5,7 +5,12 @@ import wifi
 import lora
 from network import LoRa
 import ultrasonic
+from machine import Pin
 
+# create an output pin on pin #0
+p19 = Pin('P19',mode=Pin.OUT)
+
+# set the value low then high
 
 loraactive = False
 
@@ -27,14 +32,19 @@ while True:
         info = str(distance)+"/"+str(humidity)+"/"+str(temperature)
         if not loraactive:
             wifi.sendultra(distance)
+            print(str(humidity)+" %")
+            print(str(temperature)+" C")
             wifi.sendhumidity(humidity)
             print("wifi")
 
         else:
             lora.send(distance)
             print("LoRa")
-        print(str(humidity)+" %")
-        print(str(temperature)+" C")
+        if(humidity <= 50):
+            p19.value(1)
+            time.sleep(20)
+            p19.value(0)
+
     except Exception as e:
         print(e)
 
