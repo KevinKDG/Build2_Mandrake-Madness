@@ -35,6 +35,7 @@ while True:
             print(str(humidity)+" %")
             print(str(temperature)+" C")
             wifi.sendhumidity(humidity)
+            wifi.sendtemperature(temperature)
             print("wifi")
 
         else:

@@ -86,3 +86,23 @@ def sendquality(info):
 
     except Exception as e:
         print(e)
+    def sendtemperature(info):
+        try:
+            while not wlan.isconnected():
+                set_connect()
+        except Exception as e:
+            print(e)
+        aio_key = "aio_Tvzm06zLMHVhJ619yMf4UtuNcQ45"
+        username = "joske"
+        feed_name = "mmtemp"
+
+    # Create an instance of the REST client
+        url = 'https://io.adafruit.com/api/v2/' + username + '/feeds/' + feed_name + '/data'
+        body = {'value': info}
+        headers = {'X-AIO-Key': aio_key, 'Content-Type': 'application/json'}
+        try:
+            r = requests.post(url, json=body, headers=headers)
+            r.close()
+
+        except Exception as e:
+            print(e)
