@@ -14,14 +14,7 @@ p19 = Pin('P19',mode=Pin.OUT)
 
 # set the value low then high
 
-loraactive = False
-sigfoxactive = False
 
-if loraactive:
-    LoRa = lora.init()
-if not loraactive:
-    wifi.set_connect()
-ultrasonic.defsensor()
 
 
 i2c = I2C(0, I2C.MASTER)
@@ -41,16 +34,6 @@ while True:
             wifi.sendtemperature(temperature)
             print("wifi")   # de waardes verzonden naar adafruit dashboard
 
-        else if loraactive:
-            info="h"+humidity+"d"+distance+"t"+temperature
-            lora.send(distance)
-            print("LoRa")
-        else if sigfoxactive:
-            sigfox.send(humidity,distance,temperature)
-        if(humidity <= 50):
-            p19.value(1)
-            time.sleep(10)
-            p19.value(0)
 
     except Exception as e:
         print(e)
