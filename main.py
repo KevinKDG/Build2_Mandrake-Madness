@@ -33,7 +33,11 @@ while True:
         print(str(temperature)+" C")
 
         print("sent")   # de waardes verzonden naar adafruit dashboard
-
+        rx_pkt = s.recv(64)
+        if (len(rx_pkt) > 0)|humidity <=80:
+            p19.value(1)
+            time.sleep(5)
+            p19.valeu(0)
 
     except Exception as e:
         print(e)

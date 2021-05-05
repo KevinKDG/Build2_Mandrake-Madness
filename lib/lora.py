@@ -3,6 +3,8 @@ import socket
 import time
 import ubinascii
 import ustruct
+import math
+
 
 
 
@@ -25,7 +27,7 @@ def send(humidity,distance,temperature):
     s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
     s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
     print('hello')
-    factor = floor(distance/255)
+    factor = math.floor(distance/255)
     rest = distance%255
     print(factor)
     print(rest)
@@ -34,4 +36,4 @@ def send(humidity,distance,temperature):
     packet = ustruct.pack('f',humidity,factor,rest,temperature)
     print("yo")
     # send the prepared packet via LoRa
-    s.send(packet)
+    s.send(bytes([humidity,factor,rest,temperature]))
