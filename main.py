@@ -2,6 +2,7 @@ from SI7021 import SI7021
 import time
 import wifi
 import lora
+import sigfox
 from network import LoRa
 import ultrasonic
 from machine import *
@@ -14,6 +15,7 @@ p19 = Pin('P19',mode=Pin.OUT)
 # set the value low then high
 
 loraactive = False
+sigfoxactive = False
 
 if loraactive:
     LoRa = lora.init()
@@ -31,7 +33,7 @@ while True:
         humidity = si7021.humidity()
         temperature = si7021.temperature()
         info = str(distance)+"/"+str(humidity)+"/"+str(temperature)
-        if not loraactive:
+        if not loraactive | sigfoxactive:
             wifi.sendultra(distance)
             print(str(humidity)+" %")
             print(str(temperature)+" C")
@@ -39,9 +41,12 @@ while True:
             wifi.sendtemperature(temperature)
             print("wifi")   # de waardes verzonden naar adafruit dashboard
 
-        else:
+        else if loraactive:
+            info="h"+humidity+"d"+distance+"t"+temperature
             lora.send(distance)
             print("LoRa")
+        else if sigfoxactive:
+            sigfox.send(humidity,distance,temperature)
         if(humidity <= 50):
             p19.value(1)
             time.sleep(10)
