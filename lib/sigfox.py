@@ -14,7 +14,7 @@ def send(humidity,distance,temperature):
 
     # configure it as uplink only
     s.setsockopt(socket.SOL_SIGFOX, socket.SO_RX, False)
-    distance = 1800
+
     factor = floor(distance/255)
     rest = distance%255
     print(factor)

@@ -19,6 +19,7 @@ p19 = Pin('P19',mode=Pin.OUT)
 
 i2c = I2C(0, I2C.MASTER)
 si7021 = SI7021(i2c)
+lora.init()
 while True:
     distance = ultrasonic.getdistance()
 
@@ -26,13 +27,12 @@ while True:
         humidity = si7021.humidity()
         temperature = si7021.temperature()
         info = str(distance)+"/"+str(humidity)+"/"+str(temperature)
-        if not loraactive | sigfoxactive:
-            wifi.sendultra(distance)
-            print(str(humidity)+" %")
-            print(str(temperature)+" C")
-            wifi.sendhumidity(humidity)
-            wifi.sendtemperature(temperature)
-            print("wifi")   # de waardes verzonden naar adafruit dashboard
+
+        lora.send(humidity,distance,temperature)
+        print(str(humidity)+" %")
+        print(str(temperature)+" C")
+
+        print("sent")   # de waardes verzonden naar adafruit dashboard
 
 
     except Exception as e:
