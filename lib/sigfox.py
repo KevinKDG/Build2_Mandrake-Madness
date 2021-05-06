@@ -21,4 +21,5 @@ def send(humidity,distance,temperature):
     print(rest)
     # send some bytes
     #s.send(string)
+    #testpack = ustruct.pack('s',humidity,factor,rest,temperature)   
     s.send(bytes([humidity,factor,rest,temperature]))

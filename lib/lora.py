@@ -33,7 +33,7 @@ def send(humidity,distance,temperature):
     print(rest)
     # send some bytes
     #s.send(string)
-    packet = ustruct.pack('f',humidity,factor,rest,temperature)
+    packet = ustruct.pack('s',humidity,factor,rest,temperature)
     print("yo")
     # send the prepared packet via LoRa
-    s.send(bytes([humidity,factor,rest,temperature]))
+    s.send(packet)
