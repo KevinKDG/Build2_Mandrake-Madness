@@ -28,12 +28,14 @@ def send(humidity,distance,temperature):
     s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
     print('hello')
     factor = math.floor(distance/255)
+    humidity = math.floor(humidity)
+    temperature = math.floor(temperature)
     rest = distance%255
-    print(factor)
-    print(rest)
-    # send some bytes
-    #s.send(string)
-    packet = ustruct.pack('s',humidity,factor,rest,temperature)
+    print("H", humidity)
+    print("T",temperature)
+    print("F",factor)
+    print("R",rest)
+
     print("yo")
     # send the prepared packet via LoRa
-    s.send(packet)
+    s.send(bytes([humidity,factor,rest,temperature]))

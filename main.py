@@ -27,17 +27,17 @@ while True:
         humidity = si7021.humidity()
         temperature = si7021.temperature()
         info = str(distance)+"/"+str(humidity)+"/"+str(temperature)
-
-        lora.send(humidity,distance,temperature)
+        
         print(str(humidity)+" %")
         print(str(temperature)+" C")
+        lora.send(humidity,distance,temperature)
 
         print("sent")   # de waardes verzonden naar adafruit dashboard
         rx_pkt = s.recv(64)
         if (len(rx_pkt) > 0)|humidity <=80:
             p19.value(1)
             time.sleep(5)
-            p19.valeu(0)
+            p19.value(0)
 
     except Exception as e:
         print(e)
